@@ -3,7 +3,8 @@ ini_set('display_errors', 1);
 ini_set('display_error_reporting', E_ALL);
 error_reporting(E_ALL);
 include('fonctions.php');
-$result = show_all_with_manager();
+$value = $_GET['value'];
+$result = show_employees($value);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,22 +16,28 @@ $result = show_all_with_manager();
     <link rel="stylesheet" href="bootstrap/font/bootstrap-icons.css">
 </head>
 <body class="bg-light">
+
 <div class="container mt-5">
     <h2 class="mb-4">
-        <i class="bi bi-people-fill me-2"></i>Liste des départements
+        <i class="bi bi-people-fill me-2"></i>Liste
     </h2>
+    <form action="fiche.php" method="get">
+        <input type="text" name="manger" id="" placeholder="Nom Manager">
+        <input type="text" name="employee" id="" placeholder="Nom employee">
+        <input type="number" name="min" id="" placeholder="Age min">
+        <input type="number" name="max" id="" placeholder="Age max">
+        <button type="submit">Valider</button>  
+    </form>
     <table class="table table-striped table-bordered table-hover shadow-sm">
         <thead class="table-dark">
             <tr>
-                <th><i class="bi bi-building me-1"></i>Département</th>
-                <th><i class="bi bi-person-fill me-1"></i>Manager</th>
+                <th><i class="bi bi-person-fill me-1"></i>Employees dans ce departements</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($result as $key) { ?>
             <tr>
-                <td><a href="liste.php?value=<?= $key['dept_name']; ?>"><?= $key['dept_name']; ?></a></td>
-                <td><?= $key['last_name']; ?></td>
+                <td><a href="fiche.php?first=<?= $key['first_name']; ?>&amp; last=<?= $key['last_name']; ?>" ><?= $key['first_name']; ?> <?= $key['last_name']; ?></a></td>
             </tr>
             <?php } ?>
         </tbody>

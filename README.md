@@ -1,2 +1,4 @@
 # Employees-projet
-Ato tsika sy elah no manao anio projet io 
+-add index
+-add fonctions 
+-add test (sql)
