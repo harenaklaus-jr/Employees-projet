@@ -1,118 +1,74 @@
 <?php
-function dbconnect(){
-    static $connect = null;
-    if ($connect === null) {
-        $connect = mysqli_connect('localhost','root','','employees');
+include_once 'connection.php';
 
-        if (!$connect) {
-            //Arrete le script ey affiche une erreur si la connexion echoue 
-            die('Erreur de connexion a la base de donnees: '.mysqli_connect_error());          
-        }
-        //Optionnel: definir l'encodage des caracteres pour gerer les accents 
-        mysqli_set_charset($connect, 'utf8mb4');
-    }
-
-    return $connect;
-}
-function show_all($nomTable) {
-    $sql = "select * from %s";
-    $sql = sprintf($sql,$nomTable);
-    $news_req = mysqli_query(dbconnect (),$sql);
+function get_all_lines($sql){
+    $req = mysqli_query(dbconnect(),$sql );
     $result = array();
-    while ($news = mysqli_fetch_assoc($news_req)) {
-        $result[] = $news;
+    while ($line = mysqli_fetch_assoc($req)) {
+        $result[] = $line;
     }
-    mysqli_free_result($news_req);
-    return $result;
-}
-function show_all_with_manager() {
-    $sql = "select *
-        FROM
-        dept_manager 
-        join departments on dept_manager.dept_no = departments.dept_no
-        join employees on dept_manager.emp_no = employees.emp_no
-        WHERE to_date >= '9999-01-01'";
-    $conn = dbconnect();
-    if (!$conn) {
-        return []; 
-    }
-    $news_req = mysqli_query($conn, $sql);
-    if (!$news_req) {
-        return [];
-    }
-    $result = array();
-    while ($news = mysqli_fetch_assoc($news_req)) {
-        $result[] = $news;
-    }
-    mysqli_free_result($news_req);
+    mysqli_free_result($req);
     return $result;
 }
 
-function show_employees($deptName) {
-    $sql = "
-    select *
-    FROM
-    dept_emp join departments on dept_emp.dept_no = departments.dept_no
-    join employees on dept_emp.emp_no = employees.emp_no WHERE departments.dept_name = '%s' 
-    ";
-    $sql = sprintf($sql,$deptName);
-    $conn = dbconnect();
-    if (!$conn) {
-        return []; 
-    }
-    $news_req = mysqli_query($conn, $sql);
-    if (!$news_req) {
-        return [];
-    }
-    $result = array();
-    while ($news = mysqli_fetch_assoc($news_req)) {
-        $result[] = $news;
-    }
-    mysqli_free_result($news_req);
+function get_one_line($sql){
+    $req = mysqli_query(dbconnect(),$sql );
+    $result = mysqli_fetch_assoc($req);
+    mysqli_free_result($req);
     return $result;
 }
 
-function about_employee($v1, $v2) {
-    $sql = "select 
-        *
-        from
-        employees
-        join titles on employees.emp_no = titles.emp_no
-        join salaries on employees.emp_no = salaries.emp_no
-        where employees.first_name = '%s' and employees.last_name = '%s'
-    ";
-    $sql = sprintf($sql,$v1,$v2);
-    $conn = dbconnect();
-    if (!$conn) {
-        return []; 
-    }
-    $news_req = mysqli_query($conn, $sql);
-    if (!$news_req) {
-        return [];
-    }
-    $result = array();
-    while ($news = mysqli_fetch_assoc($news_req)) {
-        $result[] = $news;
-    }
-    mysqli_free_result($news_req);
-    return $result;
+function get_all_dept_manager()
+{
+    $sql = "SELECT * 
+            FROM dept_manager 
+            JOIN departments ON dept_manager.dept_no=departments.dept_no 
+            JOIN employees ON dept_manager.emp_no=employees.emp_no 
+            WHERE to_date>='9999-01-01'";
+    return get_all_lines($sql);
 }
-function about_with_search($v1, $v2, $v3, $v4) {
-    $sql = "";
-    $sql = sprintf($sql,$v1,$v2);
-    $conn = dbconnect();
-    if (!$conn) {
-        return []; 
-    }
-    $news_req = mysqli_query($conn, $sql);
-    if (!$news_req) {
-        return [];
-    }
-    $result = array();
-    while ($news = mysqli_fetch_assoc($news_req)) {
-        $result[] = $news;
-    }
-    mysqli_free_result($news_req);
-    return $result;
+
+function get_all_employees($id) 
+{
+    $sql = "SELECT * 
+            FROM dept_emp 
+            JOIN departments ON dept_emp.dept_no=departments.dept_no 
+            JOIN employees ON dept_emp.emp_no=employees.emp_no 
+            WHERE dept_name='%s'";
+    $sql = sprintf($sql, $id);
+    return get_all_lines($sql);
+}
+
+function get_info_employees($id)
+{  
+    $sql = "SELECT * FROM employees WHERE emp_no=%d";
+    $sql = sprintf($sql, $id);
+    // echo $sql;
+    return get_one_line($sql);
+}
+
+function get_info_salaire($id)
+{
+    $sql = "SELECT 
+            salary, from_date, to_date 
+            FROM salaries 
+            WHERE emp_no=%d";
+    $sql = sprintf($sql, $id);
+    return get_all_lines($sql);
+}
+
+function get_info_title($id)
+{
+    $sql = "SELECT 
+            title, from_date, to_date 
+            FROM titles 
+            WHERE emp_no=%d ORDER BY from_date ASC";
+    $sql = sprintf($sql, $id);
+    return get_all_lines($sql);
+}
+
+function get_research($nom, $age_min, $age_max, $departement)
+{
+    
 }
 ?>

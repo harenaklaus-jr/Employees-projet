@@ -1,9 +1,9 @@
 <?php
+include_once "inc/fonctions.php";
 ini_set('display_errors', 1);
 ini_set('display_error_reporting', E_ALL);
 error_reporting(E_ALL);
-include('fonctions.php');
-$result = show_all_with_manager();
+$list = get_all_dept_manager();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,10 +27,10 @@ $result = show_all_with_manager();
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($result as $key) { ?>
+            <?php foreach ($list as $list_ligne) { ?>
             <tr>
-                <td><a href="liste.php?value=<?= $key['dept_name']; ?>"><?= $key['dept_name']; ?></a></td>
-                <td><?= $key['last_name']; ?></td>
+                <td><a href="liste.php?value=<?= $list_ligne['dept_name']; ?>"><?= $list_ligne['dept_name']; ?></a></td>
+                <td><?= $list_ligne['last_name']; ?></td>
             </tr>
             <?php } ?>
         </tbody>

@@ -7,3 +7,5 @@
 -(amboariko kely lo ny filaminany le cody sy dossier mba milamina tsara le izy fa mikorotana b😂)
 -ataonla in ato lty reo pdf reo le?
 
+##
+Novaiko ny function tao, otr'izao izy mba milamina.
