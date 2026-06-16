@@ -1,14 +1,11 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_error_reporting', E_ALL);
-error_reporting(E_ALL);
-
 include_once "inc/fonctions.php";
 $dept_no = $_GET['dept_no'];
 $list_employees = get_all_employees($dept_no);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,10 +13,11 @@ $list_employees = get_all_employees($dept_no);
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap/font/bootstrap-icons.css">
 </head>
+
 <body class="bg-light">
 
-<div class="container mt-5">
-    <!-- Formulaire de recherche -->
+    <div class="container mt-5">
+        <!-- Formulaire de recherche -->
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-header bg-dark text-white py-3">
                 <h5 class="mb-0">
@@ -35,7 +33,7 @@ $list_employees = get_all_employees($dept_no);
                             <label for="name" class="form-label fw-semibold">
                                 <i class="bi bi-person me-1"></i>Nom
                             </label>
-                            <input type="text" class="form-control" name="name" id="name" placeholder="Ex: Dupont">
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Ex: Jean">
                         </div>
 
                         <!-- Age-->
@@ -55,17 +53,17 @@ $list_employees = get_all_employees($dept_no);
                             <label for="departement" class="form-label fw-semibold">
                                 <i class="bi bi-building me-1"></i>Département
                             </label>
-                            <select class="form-select" name="departement" id="departement">
+                            <select class="form-select" name="dept_no" id="departement">
                                 <option value="">-- Choisir un département --</option>
-                                <option value="Marketing">Marketing</option>
-                                <option value="Finance">Finance</option>
-                                <option value="Human Resources">Human Resources</option>
-                                <option value="Production">Production</option>
-                                <option value="Development">Development</option>
-                                <option value="Quality Management">Quality Management</option>
-                                <option value="Sales">Sales</option>
-                                <option value="Research">Research</option>
-                                <option value="Customer Service">Customer Service</option>
+                                <option value="d001">Marketing</option>
+                                <option value="d002">Finance</option>
+                                <option value="d003">Human Resources</option>
+                                <option value="d004">Production</option>
+                                <option value="d005">Development</option>
+                                <option value="d006">Quality Management</option>
+                                <option value="d007">Sales</option>
+                                <option value="d008">Research</option>
+                                <option value="d009">Customer Service</option>
                             </select>
                         </div>
 
@@ -115,7 +113,8 @@ $list_employees = get_all_employees($dept_no);
                 </table>
             </div>
         </div>
-</div>
+    </div>
 
 </body>
+
 </html>

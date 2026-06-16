@@ -69,6 +69,20 @@ function get_info_title($id)
 
 function get_research($nom, $age_min, $age_max, $departement)
 {
-    
+    $sql = "SELECT
+            employees.emp_no, 
+            employees.first_name AS name,
+            employees.last_name,
+            TIMESTAMPDIFF(YEAR, employees.birth_date, CURDATE()) AS age,
+            departments.dept_name AS departments
+            FROM dept_emp 
+            JOIN departments ON dept_emp.dept_no=departments.dept_no 
+            JOIN employees ON dept_emp.emp_no=employees.emp_no 
+            WHERE employees.first_name='%s' 
+            AND (TIMESTAMPDIFF(YEAR, employees.birth_date, CURDATE())>=%d 
+            AND TIMESTAMPDIFF(YEAR, employees.birth_date, CURDATE())<=%d)
+            AND departments.dept_no='%s'";
+    $sql = sprintf($sql, $nom, $age_min, $age_max, $departement);
+    return get_all_lines($sql);
 }
 ?>

@@ -30,4 +30,17 @@ salaries on employees.emp_no = salaries.emp_no
 limit 1
 ;
 
+-- recherche
+SELECT 
+employees.first_name AS name,
+TIMESTAMPDIFF(YEAR, employees.birth_date, CURDATE()) AS age,
+departments.dept_name AS departments
+FROM dept_emp 
+JOIN departments ON dept_emp.dept_no=departments.dept_no 
+JOIN employees ON dept_emp.emp_no=employees.emp_no 
+WHERE employees.first_name='Vishwani' 
+AND (TIMESTAMPDIFF(YEAR, employees.birth_date, CURDATE())>= 26 
+AND TIMESTAMPDIFF(YEAR, employees.birth_date, CURDATE())<=100)
+AND departments.dept_name='Marketing';
+
 

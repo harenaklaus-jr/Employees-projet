@@ -1,8 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_error_reporting', E_ALL);
-error_reporting(E_ALL);
-
 include_once "inc/fonctions.php";
 $list = get_all_dept_manager();
 ?>
@@ -28,7 +24,7 @@ $list = get_all_dept_manager();
                 </h5>
             </div>
             <div class="card-body p-4">
-                <form action="traitement.php" method="post">
+                <form action="get_recherche.php" method="post">
                     <div class="row g-3 align-items-end">
 
                         <!-- Nom -->
@@ -36,7 +32,7 @@ $list = get_all_dept_manager();
                             <label for="name" class="form-label fw-semibold">
                                 <i class="bi bi-person me-1"></i>Nom
                             </label>
-                            <input type="text" class="form-control" name="name" id="name" placeholder="Ex: Dupont">
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Ex: Jean">
                         </div>
 
                         <!-- Age-->
@@ -56,17 +52,17 @@ $list = get_all_dept_manager();
                             <label for="departement" class="form-label fw-semibold">
                                 <i class="bi bi-building me-1"></i>Département
                             </label>
-                            <select class="form-select" name="departement" id="departement">
+                            <select class="form-select" name="dept_no" id="departement">
                                 <option value="">-- Choisir un département --</option>
-                                <option value="Marketing">Marketing</option>
-                                <option value="Finance">Finance</option>
-                                <option value="Human Resources">Human Resources</option>
-                                <option value="Production">Production</option>
-                                <option value="Development">Development</option>
-                                <option value="Quality Management">Quality Management</option>
-                                <option value="Sales">Sales</option>
-                                <option value="Research">Research</option>
-                                <option value="Customer Service">Customer Service</option>
+                                <option value="d001">Marketing</option>
+                                <option value="d002">Finance</option>
+                                <option value="d003">Human Resources</option>
+                                <option value="d004">Production</option>
+                                <option value="d005">Development</option>
+                                <option value="d006">Quality Management</option>
+                                <option value="d007">Sales</option>
+                                <option value="d008">Research</option>
+                                <option value="d009">Customer Service</option>
                             </select>
                         </div>
 
