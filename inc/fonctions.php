@@ -34,7 +34,7 @@ function get_all_employees($id)
             FROM dept_emp 
             JOIN departments ON dept_emp.dept_no=departments.dept_no 
             JOIN employees ON dept_emp.emp_no=employees.emp_no 
-            WHERE dept_name='%s'";
+            WHERE dept_emp.dept_no='%s'";
     $sql = sprintf($sql, $id);
     return get_all_lines($sql);
 }

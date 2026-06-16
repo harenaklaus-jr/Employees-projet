@@ -2,9 +2,10 @@
 ini_set('display_errors', 1);
 ini_set('display_error_reporting', E_ALL);
 error_reporting(E_ALL);
-include('fonctions.php');
-$value = $_GET['value'];
-$result = show_employees($value);
+
+include_once "inc/fonctions.php";
+$dept_no = $_GET['dept_no'];
+$list_employees = get_all_employees($dept_no);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,9 +36,9 @@ $result = show_employees($value);
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($result as $key) { ?>
+            <?php foreach ($list_employees as $list_employees_ligne) { ?>
             <tr>
-                <td><a href="fiche.php?first=<?= $key['first_name']; ?>&amp; last=<?= $key['last_name']; ?>" ><?= $key['first_name']; ?> <?= $key['last_name']; ?></a></td>
+                <td><a href="fiche.php?first=<?= $list_employees_ligne['first_name']; ?>&amp; last=<?= $list_employees_ligne['last_name']; ?>" ><?= $list_employees_ligne['first_name']; ?> <?= $list_employees_ligne['last_name']; ?></a></td>
             </tr>
             <?php } ?>
         </tbody>

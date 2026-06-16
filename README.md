@@ -8,4 +8,6 @@
 -ataonla in ato lty reo pdf reo le?
 
 ##
-Novaiko ny function tao, otr'izao izy mba milamina.
+Novaiko ny function tao, otr'izao izy mba milamina
+## index.php
+ajouter un lien "Voir tous les employées".
